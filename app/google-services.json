@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "758004466228",
+    "firebase_url": "https://kbgs1-3286a.firebaseio.com",
+    "project_id": "kbgs1-3286a",
+    "storage_bucket": "kbgs1-3286a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758004466228:android:33ab5ebc6003984b",
+        "android_client_info": {
+          "package_name": "com.giridharmaximuzindia.kbg_s1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758004466228-4sshb3ug4vadopm4vjrljqk4roqpal4l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.giridharmaximuzindia.kbg_s1",
+            "certificate_hash": "0c1ec8853deff43dc3dfd5eef22f121e23d59600"
+          }
+        },
+        {
+          "client_id": "758004466228-49k5i110iggrdc13t3sc6o0r5929suki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqpsAkHXqPi7vX3ASHuyItv-2HtcvklkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758004466228-49k5i110iggrdc13t3sc6o0r5929suki.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

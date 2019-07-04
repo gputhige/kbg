@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">KBG S1</string>
+    <string name="app_maker">Brought to you by MAXIMUZ</string>
+    <string name="solo_head">SOLO PLAYER </string>
+    <string name="solo_main">You will be playing the game as a Solo Player. You may refer this game to 3 of your friends and earn Loyalty
+        points. You can do this by clicking on the KBG logo once the game starts. </string>
+    <string name="capt_head">CAPTAIN</string>
+    <string name="capt_main">You are the Captain of this Group. You should invite 3 friends - <b> Mates </b> - from your Contact List.\n You will get Loyalty
+    points for inviting your friends.The Game starts only when all your Mates Register.\n You can move to the next level only when all of you
+    complete the current level. Winner of this group, will get additional Bonus Points. </string>
+    <string name="rules">You will be playing the game as a Solo Player. A total of 10 questions will be given to you
+    and you will have to answer them within 60 seconds.For every question answered correct and within the time period,
+    you will earn points. As you </string>
+</resources>
