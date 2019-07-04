@@ -34,8 +34,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
@@ -109,26 +113,46 @@ public class SignUpActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if(task.isSuccessful()){
-                                            Map<String, Object> players = new HashMap<>();
-                                            players.put(Constants.DocumentFields.USERNAME, username);
-                                            players.put(Constants.DocumentFields.EMAIL,email);
-                                            players.put(Constants.DocumentFields.PHONE, phone);
-                                            players.put(Constants.DocumentFields.PASSWORD, password);
-                                            players.put(Constants.DocumentFields.SOLOOPTION,solooption);
-                                            players.put(Constants.DocumentFields.MATEOPTION, mateoption);
-                                            players.put(Constants.DocumentFields.CAPOPTION, capoption);
+                                            CollectionReference playerRef = db.collection(Constants.USER_COLLECTION);
+                                            Query query = playerRef.whereEqualTo("phone",phone);
+                                            query.get()
+                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                            if(task.isSuccessful()){
+                                                                for(DocumentSnapshot documentSnapshot : task.getResult()){
+                                                                    String phone = documentSnapshot.getString("phone");
 
-                                                db.collection("PLAYERS")
-                                                        .add(players)
-                                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                            @Override
-                                                            public void onSuccess(DocumentReference documentReference) {
-                                                                Toast.makeText(SignUpActivity.this,"Success",Toast.LENGTH_SHORT).show();
+                                                                    if(phone.equals(phone)){
+                                                                        Toast.makeText(SignUpActivity.this, "This number is alredy registered", Toast.LENGTH_SHORT).show();
+                                                                    }else {
+                                                                        Map<String, Object> players = new HashMap<>();
+                                                                        players.put(Constants.DocumentFields.USERNAME, username);
+                                                                        players.put(Constants.DocumentFields.EMAIL,email);
+                                                                        players.put(Constants.DocumentFields.PHONE, phone);
+                                                                        players.put(Constants.DocumentFields.PASSWORD, password);
+                                                                        players.put(Constants.DocumentFields.SOLOOPTION,solooption);
+                                                                        players.put(Constants.DocumentFields.MATEOPTION, mateoption);
+                                                                        players.put(Constants.DocumentFields.CAPOPTION, capoption);
+
+                                                                        db.collection("PLAYERS")
+                                                                                .add(players)
+                                                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                                    @Override
+                                                                                    public void onSuccess(DocumentReference documentReference) {
+                                                                                        Toast.makeText(SignUpActivity.this,"Success",Toast.LENGTH_SHORT).show();
+                                                                                    }
+                                                                                });
+                                                                        Toast.makeText(SignUpActivity.this,"User Added Successfully", Toast.LENGTH_SHORT).show();
+                                                                        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                                                                        finish();
+
+                                                                    }
+                                                                }
                                                             }
-                                                        });
-                                                Toast.makeText(SignUpActivity.this,"User Added Successfully", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-                                                finish();
+                                                            Toast.makeText(SignUpActivity.this, "Some Error ",Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                         }else {
                                             Toast.makeText(SignUpActivity.this, "Error "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
@@ -137,9 +161,6 @@ public class SignUpActivity extends AppCompatActivity {
                     }else {
                         Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                     }
-
-
-
                 }
             }
         });
